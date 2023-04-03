@@ -1,0 +1,32 @@
+# Copyright lowRISC contributors.
+# Licensed under the Apache License, Version 2.0, see LICENSE for details.
+# SPDX-License-Identifier: Apache-2.0
+
+package(default_visibility = ["//visibility:public"])
+
+load("@lowrisc_bazel_release//release:release.bzl", "release")
+load("@rules_pkg//pkg:tar.bzl", "pkg_tar")
+
+genrule(
+    name = "ec_bin",
+    srcs = ["@ec_src//:gen_dir"],
+    outs = ["ec.bin"],
+    cmd = "cp $(location @ec_src//:gen_dir)/ec.bin $@",
+)
+
+pkg_tar(
+    name = "hyperdebug-firmware",
+    srcs = [
+        "90-hyperdebug.rules",
+        ":ec_bin",
+    ],
+    extension = "tar.gz",
+    package_dir = "hyperdebug",
+)
+
+release(
+    name = "release",
+    artifacts = {
+        ":hyperdebug-firmware": "Hyperdebug Firmware",
+    },
+)

@@ -1,0 +1,44 @@
+# Copyright lowRISC contributors.
+# Licensed under the Apache License, Version 2.0, see LICENSE for details.
+# SPDX-License-Identifier: Apache-2.0
+
+package(default_visibility = ["//visibility:public"])
+
+load("@rules_foreign_cc//foreign_cc:make.bzl", "make")
+load("@rules_pkg//pkg:tar.bzl", "pkg_tar")
+
+arm_prefix = "../../../../../../external/gcc_arm_none_eabi_files/bin/arm-none-eabi-"
+
+host_prefix = "x86_64-linux-gnu-"
+
+filegroup(
+    name = "all_srcs",
+    srcs = glob(["**"]),
+)
+
+make(
+    name = "hyperdebug",
+    args = [
+        "-j",
+        "BOARD=hyperdebug",
+        "ALLOW_CONFIG=1",
+        "BUILDCC_PREFIX={}".format(host_prefix),
+        "CROSS_COMPILE_arm={}".format(arm_prefix),
+        "out=$$INSTALLDIR$$",
+    ],
+    build_data = [
+        "@gcc_arm_none_eabi_files//:all",
+    ],
+    lib_source = ":all_srcs",
+    out_bin_dir = "",
+    out_binaries = [
+        "ec.bin",
+    ],
+    targets = ["all"],
+)
+
+filegroup(
+    name = "gen_dir",
+    srcs = [":hyperdebug"],
+    output_group = "gen_dir",
+)
