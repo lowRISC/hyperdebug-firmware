@@ -19,7 +19,8 @@ jobs:
           sudo apt-get install -y $(find . -name apt-requirements.txt | xargs sed -e "s/#.*//g")
       - name: Build
         run: |
-          bazel build :release
+          git tag ${{ inputs.release_tag }}
+          bazel build --stamp :release
       - name: Test
         run: |
           echo "No tests to run"
