@@ -4,4 +4,10 @@
 
 package(default_visibility = ["//visibility:public"])
 
-exports_files(glob(["**"]))
+genrule(
+    name = "custom_version",
+    srcs = ["custom_version.sh"],
+    outs = ["custom_version.h"],
+    cmd = "$(location custom_version.sh) > $@",
+    stamp = 1,
+)
