@@ -11,4 +11,8 @@ def chromium_repos():
         # branch = "refs/changes/70/4336270/26",
         commit = "43df33b4e57591c0b215ae01474d8c92597306a5",
         build_file = "//third_party/chromium:BUILD.ec_src.bazel",
+        patches = [
+            "//third_party/chromium:ec-custom-version.patch",
+        ],
+        patch_args = ["-p1"],
     )

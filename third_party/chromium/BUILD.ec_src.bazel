@@ -7,7 +7,12 @@ package(default_visibility = ["//visibility:public"])
 load("@rules_foreign_cc//foreign_cc:make.bzl", "make")
 load("@rules_pkg//pkg:tar.bzl", "pkg_tar")
 
-arm_prefix = "../../../../../../external/gcc_arm_none_eabi_files/bin/arm-none-eabi-"
+# The `make` rule will build inside of subdirectory 6 levels deep from
+# the top of the project.  In order to access anything external to that
+# subdirectory, we need to climb back up to the root.
+bazel_root = "../../../../../.."
+
+arm_prefix = "external/gcc_arm_none_eabi_files/bin/arm-none-eabi-"
 
 host_prefix = "x86_64-linux-gnu-"
 
@@ -23,12 +28,16 @@ make(
         "BOARD=hyperdebug",
         "ALLOW_CONFIG=1",
         "BUILDCC_PREFIX={}".format(host_prefix),
-        "CROSS_COMPILE_arm={}".format(arm_prefix),
+        "CROSS_COMPILE_arm={}/{}".format(bazel_root, arm_prefix),
         "out=$$INSTALLDIR$$",
     ],
     build_data = [
         "@gcc_arm_none_eabi_files//:all",
+        "@lowrisc_hyperdebug//util:custom_version",
     ],
+    env = {
+        "CUSTOM_VERSION": "{}/$(location @lowrisc_hyperdebug//util:custom_version)".format(bazel_root),
+    },
     lib_source = ":all_srcs",
     out_bin_dir = "",
     out_binaries = [
