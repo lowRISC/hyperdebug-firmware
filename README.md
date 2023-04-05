@@ -12,9 +12,9 @@ EC](https://chromium.googlesource.com/chromiumos/platform/ec) firmware.
 
 ## Updating
 
-This repository does not contain the Chromium EC source code.  Instead, we
-reference Chromium's git repository at the given commit that contains the
-features we need for hyperdebug (this allows the hyperdebug firmware 
+This repository does not contain the Chromium EC source code.  Instead,
+we reference Chromium's git repository at the commit that contains the
+features we need for hyperdebug (this allows the hyperdebug firmware
 release to be independent from EC releases).
 
 To change the version of EC firmware used as hyperdebug firmware, update
@@ -24,7 +24,7 @@ the `git_repository` rule in [`//third_party/chromium/repos.bzl`](third_party/ch
 git_repository(
     name = "ec_src",
     remote = "https://chromium.googlesource.com/chromiumos/platform/ec",
-    commit = "43df33b4e57591c0b215ae01474d8c92597306a5",
+    commit = "17c8bc295fb6c2a258efadb4a52f04a0f494ec0d",
     build_file = "//third_party/chromium:BUILD.ec_src.bazel",
 )
 ```
@@ -44,10 +44,19 @@ binary and support files.
 
 ## Releasing
 
-To perform a release of the firmware, issue the following command:
+To perform a release of the firmware, use the **Create Release** flow
+in the **Actions** tab.  It is suggested that you use a `release_tag`
+patterned after the build date: `YYYYMMDD_RR`, where:
+- `YYYY` is the year.
+- `MM` is the month.
+- `DD` is the day.
+- `RR` is the number of the release on that date, starting at `01`.
+
+To perform a manual release of the firmware, issue the following command:
 
 ```
-bazel run :release -- ${VERSION_TAG}
+RELEASE_TAG="YYYYMMDD_RR"
+bazel run :release -- ${RELEASE_TAG}
 ```
 
 This will build the firmware archive, create a git tag and publish the
