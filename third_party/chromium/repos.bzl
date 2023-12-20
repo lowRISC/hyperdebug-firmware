@@ -8,7 +8,7 @@ def chromium_repos():
     git_repository(
         name = "ec_src",
         remote = "https://chromium.googlesource.com/chromiumos/platform/ec",
-        commit = "c22816fc39169d633061ae9670e4eb8c24eec8bd",
+        commit = "983c86fb0539a9d13798e9c2a620ad7c52508ac3",
         build_file = "//third_party/chromium:BUILD.ec_src.bazel",
         patches = [
             "//third_party/chromium:ec-custom-version.patch",
