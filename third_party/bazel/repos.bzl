@@ -16,12 +16,11 @@ def bazel_repos():
         sha256 = "379113459b0feaf6bfbb584a91874c065078aa673222846ac765f86661c27407",
     )
 
-    maybe(
-        http_archive,
+    http_archive(
         name = "rules_foreign_cc",
-        sha256 = "6041f1374ff32ba711564374ad8e007aef77f71561a7ce784123b9b4b88614fc",
-        strip_prefix = "rules_foreign_cc-0.8.0",
-        url = "https://github.com/bazelbuild/rules_foreign_cc/archive/0.8.0.tar.gz",
+        sha256 = "4b33d62cf109bcccf286b30ed7121129cc34cf4f4ed9d8a11f38d9108f40ba74",
+        strip_prefix = "rules_foreign_cc-0.11.1",
+        url = "https://github.com/bazelbuild/rules_foreign_cc/releases/download/0.11.1/rules_foreign_cc-0.11.1.tar.gz",
     )
 
     maybe(
