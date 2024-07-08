@@ -6,16 +6,6 @@ load("@bazel_tools//tools/build_defs/repo:utils.bzl", "maybe")
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 def bazel_repos():
-    maybe(
-        http_archive,
-        name = "platforms",
-        urls = [
-            "https://mirror.bazel.build/github.com/bazelbuild/platforms/releases/download/0.0.5/platforms-0.0.5.tar.gz",
-            "https://github.com/bazelbuild/platforms/releases/download/0.0.5/platforms-0.0.5.tar.gz",
-        ],
-        sha256 = "379113459b0feaf6bfbb584a91874c065078aa673222846ac765f86661c27407",
-    )
-
     http_archive(
         name = "rules_foreign_cc",
         sha256 = "4b33d62cf109bcccf286b30ed7121129cc34cf4f4ed9d8a11f38d9108f40ba74",
