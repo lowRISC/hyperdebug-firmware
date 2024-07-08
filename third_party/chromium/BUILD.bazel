@@ -17,7 +17,9 @@ make(
         "out=$$INSTALLDIR$$",
     ],
     build_data = [
-        "@gcc_arm_none_eabi_files//:all",
+        "@arm_none_eabi//:gcc",
+        "@arm_none_eabi//:nm",
+        "@arm_none_eabi//:objcopy",
         "@lowrisc_hyperdebug//util:custom_version",
     ],
     env = {
