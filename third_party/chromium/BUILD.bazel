@@ -4,4 +4,27 @@
 
 package(default_visibility = ["//visibility:public"])
 
-exports_files(glob(["**"]))
+load("@rules_foreign_cc//foreign_cc:make.bzl", "make")
+
+make(
+    name = "hyperdebug",
+    args = [
+        "-j",
+        "BOARD=hyperdebug",
+        "ALLOW_CONFIG=1",
+        "BUILDCC_PREFIX=x86_64-linux-gnu-",
+        "CROSS_COMPILE=$$EXT_BUILD_ROOT$$/$(dirname $(execpath @arm_none_eabi//:gcc))/",
+        "out=$$INSTALLDIR$$",
+    ],
+    build_data = [
+        "@gcc_arm_none_eabi_files//:all",
+        "@lowrisc_hyperdebug//util:custom_version",
+    ],
+    env = {
+        "CUSTOM_VERSION": "$(execpath @lowrisc_hyperdebug//util:custom_version)",
+    },
+    lib_source = "@ec_src//:all_srcs",
+    out_bin_dir = "",
+    out_binaries = ["ec.bin"],
+    targets = ["all"],
+)
