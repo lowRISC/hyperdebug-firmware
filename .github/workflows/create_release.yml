@@ -1,4 +1,9 @@
+# Copyright lowRISC contributors.
+# Licensed under the Apache License, Version 2.0, see LICENSE for details.
+# SPDX-License-Identifier: Apache-2.0
+
 name: Create Release
+
 on:
   workflow_dispatch:
     inputs:
@@ -8,25 +13,26 @@ on:
 
 jobs:
   release:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Install Dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y $(find . -name apt-requirements.txt | xargs sed -e "s/#.*//g")
-      - name: Build
+      - name: Create tag
         run: |
-          git tag ${{ inputs.release_tag }}
-          bazel build --stamp :release
-      - name: Test
+          git tag "${{ inputs.release_tag }}"
+          git push origin tag "${{ inputs.release_tag }}"
+      - name: Build firmware
         run: |
-          echo "No tests to run"
-          # bazel test //...
+          bazel build --stamp :hyperdebug-firmware
       - name: Publish Release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          bazel run :release -- ${{ inputs.release_tag }}
+          gh release create "${{ inputs.release_tag }}" \
+            --title "${{ inputs.release_tag }}"
+          gh release upload "${{ inputs.release_tag }}" \
+            "$(bazel cquery --output=files :hyperdebug-firmware)"

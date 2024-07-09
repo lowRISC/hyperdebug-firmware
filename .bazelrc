@@ -8,3 +8,6 @@ build --workspace_status_command=util/get_workspace_status.sh
 
 # Import site-specific configuration.
 try-import .bazelrc-site
+
+# This repo no longer supports `WORKSPACE` dependencies.
+common --enable_bzlmod
