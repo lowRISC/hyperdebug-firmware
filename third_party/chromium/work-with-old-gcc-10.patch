@@ -1,0 +1,13 @@
+diff --git a/Makefile.toolchain b/Makefile.toolchain
+index 76a0504e35..97b1267e3d 100644
+--- a/Makefile.toolchain
++++ b/Makefile.toolchain
+@@ -210,7 +210,7 @@ ifneq ($(CROSS_COMPILE_CC_NAME),clang)
+ # is set to 0 such that GCC never generates any warnings for the constant
+ # address pointers. For more details, refer to the GCC PR99578.
+ ifneq ($(BOARD), host)
+-CFLAGS+= --param min-pagesize=0
++
+ endif
+ endif
+ ifneq ($(CROSS_COMPILE_CC_NAME),clang)

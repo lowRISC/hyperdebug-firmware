@@ -28,7 +28,7 @@ make(
         "BOARD=hyperdebug",
         "ALLOW_CONFIG=1",
         "BUILDCC_PREFIX={}".format(host_prefix),
-        "CROSS_COMPILE_arm={}/{}".format(bazel_root, arm_prefix),
+        "CROSS_COMPILE={}/{}".format(bazel_root, arm_prefix),
         "out=$$INSTALLDIR$$",
     ],
     build_data = [
