@@ -12,6 +12,7 @@ def chromium_repos():
         build_file = "//third_party/chromium:BUILD.ec_src.bazel",
         patches = [
             "//third_party/chromium:ec-custom-version.patch",
+            "//third_party/chromium:work-with-old-gcc-10.patch",
         ],
         patch_args = ["-p1"],
     )
