@@ -75,7 +75,7 @@
   "moduleExtensions": {
     "//:extensions.bzl%sources": {
       "general": {
-        "bzlTransitiveDigest": "crW/wPcfxF+qD+gvfUik5CfPLbuuzArVu4Isxj28I+I=",
+        "bzlTransitiveDigest": "sL1AbasrQUtiw0rpatdbROotSJ1PRKa/EsyzMKvcO80=",
         "usagesDigest": "5YW6ZI0TTWi1Ue9tnGlTzGSpj71MpwGn4UTFwZPtJQc=",
         "recordedFileInputs": {},
         "recordedDirentsInputs": {},
@@ -86,7 +86,7 @@
             "ruleClassName": "git_repository",
             "attributes": {
               "remote": "https://chromium.googlesource.com/chromiumos/platform/ec",
-              "commit": "a3d721e81c4c69821c9eaccb3aac632b519c3852",
+              "commit": "765b8a9d2b494c16db85ed6981fda449dfeccbe0",
               "build_file": "@@//third_party/chromium:BUILD.ec_src.bazel",
               "patches": [
                 "@@//third_party/chromium:ec-custom-version.patch",
