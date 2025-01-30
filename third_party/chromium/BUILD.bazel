@@ -27,6 +27,6 @@ make(
     },
     lib_source = "@ec_src//:all_srcs",
     out_bin_dir = "",
-    out_binaries = ["ec.bin"],
+    out_binaries = ["ec.bin", "RW/ec.RW.elf"],
     targets = ["all"],
 )
