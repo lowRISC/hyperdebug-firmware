@@ -7,8 +7,8 @@ load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 def chromium_repos():
     git_repository(
         name = "ec_src",
+        branch = "refs/changes/42/6217842/1",
         remote = "https://chromium.googlesource.com/chromiumos/platform/ec",
-        commit = "765b8a9d2b494c16db85ed6981fda449dfeccbe0",
         build_file = "//third_party/chromium:BUILD.ec_src.bazel",
         patches = [
             "//third_party/chromium:ec-custom-version.patch",
